@@ -1,10 +1,10 @@
 import { bio, education, experience } from "@/lib/data";
 
-export function About() {
+export function AboutPage() {
   return (
-    <section id="a-propos" className="border-b border-[var(--color-line)] px-6 py-16 md:px-16 md:py-20">
+    <div className="min-h-full px-6 py-16 md:px-16 md:py-20">
       <div className="mx-auto max-w-5xl">
-        <h2 className="text-sm font-medium text-[var(--color-trace)]">À propos</h2>
+        <h2 className="font-mono text-sm text-[var(--color-trace)]">01 — À propos</h2>
 
         <div className="mt-6 grid gap-12 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
           <p className="max-w-md text-balance text-lg leading-relaxed">{bio}</p>
@@ -44,6 +44,6 @@ export function About() {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

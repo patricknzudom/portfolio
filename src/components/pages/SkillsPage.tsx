@@ -1,10 +1,10 @@
 import { skills } from "@/lib/data";
 
-export function Skills() {
+export function SkillsPage() {
   return (
-    <section id="competences" className="border-b border-[var(--color-line)] px-6 py-16 md:px-16 md:py-20">
-      <div className="mx-auto max-w-5xl">
-        <h2 className="text-sm font-medium text-[var(--color-trace)]">Compétences</h2>
+    <div className="flex min-h-full flex-col justify-center px-6 py-16 md:px-16 md:py-20">
+      <div className="mx-auto w-full max-w-5xl">
+        <h2 className="font-mono text-sm text-[var(--color-trace)]">02 — Compétences</h2>
 
         <div className="mt-6 grid gap-x-10 gap-y-8 sm:grid-cols-2">
           {skills.map((group) => (
@@ -24,6 +24,6 @@ export function Skills() {
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

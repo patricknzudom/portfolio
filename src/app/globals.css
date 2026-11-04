@@ -48,11 +48,8 @@ a {
   text-underline-offset: 3px;
 }
 
-/* Respecte les préférences de mouvement réduit : la seule animation du site (le trait qui se
-   dessine dans la marge) est coupée net plutôt que simplement ralentie. */
-@media (prefers-reduced-motion: reduce) {
-  .rail-trace {
-    animation: none !important;
-    stroke-dashoffset: 0 !important;
-  }
+/* Pas de barre de défilement visible dans les pages (la pagination remplace le défilement de
+   page), mais elles restent défilables au clavier/à la molette quand leur contenu dépasse l'écran. */
+.overflow-y-auto {
+  scrollbar-width: thin;
 }
