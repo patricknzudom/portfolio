@@ -1,15 +1,16 @@
 "use client";
 
-import { profile, ui } from "@/lib/content";
+import { profile } from "@/lib/content";
 import { useLang } from "@/components/LangContext";
 import { HeroField } from "@/components/HeroField";
+import { ScrollCue } from "@/components/ScrollCue";
 
 export function IntroPage() {
   const { lang } = useLang();
   const p = profile[lang];
 
   return (
-    <div className="relative flex min-h-full flex-col justify-center overflow-hidden px-6 py-16 md:px-16">
+    <section id="accueil" className="relative flex min-h-[calc(100dvh-49px)] flex-col justify-center overflow-hidden px-6 py-16 md:px-16">
       <HeroField />
       <div className="relative z-[1] mx-auto w-full max-w-3xl">
         <p className="font-mono text-sm text-[var(--color-trace)]">{p.role}</p>
@@ -28,8 +29,8 @@ export function IntroPage() {
           </a>
         </div>
 
-        <p className="mt-16 font-mono text-xs text-[var(--color-ink-soft)]">{ui[lang].navHint}</p>
+        <ScrollCue />
       </div>
-    </div>
+    </section>
   );
 }

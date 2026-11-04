@@ -4,6 +4,7 @@ import { featuredProjects, otherProjects, ui, type Project } from "@/lib/content
 import { useLang } from "@/components/LangContext";
 import { ProfinoDemo } from "@/components/ProfinoDemo";
 import { ArchitectureDiagram } from "@/components/ArchitectureDiagram";
+import { Reveal } from "@/components/Reveal";
 
 function StackLine({ stack }: { stack: string[] }) {
   return (
@@ -72,8 +73,8 @@ export function ProjectsPage() {
   const t = ui[lang];
 
   return (
-    <div className="min-h-full px-6 py-16 md:px-16 md:py-20">
-      <div className="mx-auto max-w-5xl">
+    <section id="projets" className="border-t border-[var(--color-line)] px-6 py-20 md:px-16 md:py-28">
+      <Reveal className="mx-auto max-w-5xl">
         <h2 className="font-mono text-sm text-[var(--color-trace)]">{t.sectionHeaders.projects}</h2>
 
         <div className="mt-6 grid gap-5 md:grid-cols-2">
@@ -108,7 +109,7 @@ export function ProjectsPage() {
             <CompactRow key={p.name} project={p} />
           ))}
         </div>
-      </div>
-    </div>
+      </Reveal>
+    </section>
   );
 }

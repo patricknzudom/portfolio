@@ -2,14 +2,15 @@
 
 import { profile, ui } from "@/lib/content";
 import { useLang } from "@/components/LangContext";
+import { Reveal } from "@/components/Reveal";
 
 export function ContactPage() {
   const { lang } = useLang();
   const p = profile[lang];
 
   return (
-    <div className="flex min-h-full flex-col justify-center px-6 py-16 md:px-16">
-      <div className="mx-auto w-full max-w-5xl">
+    <section id="contact" className="border-t border-[var(--color-line)] px-6 py-20 md:px-16 md:py-32">
+      <Reveal className="mx-auto w-full max-w-5xl">
         <h2 className="font-mono text-sm text-[var(--color-trace)]">{ui[lang].sectionHeaders.contact}</h2>
         <p className="mt-4 max-w-md text-lg leading-relaxed">{ui[lang].contactLine}</p>
 
@@ -41,10 +42,10 @@ export function ContactPage() {
           </a>
         </div>
 
-        <p className="mt-16 font-mono text-xs text-[var(--color-ink-soft)]">
+        <p className="mt-20 font-mono text-xs text-[var(--color-ink-soft)]">
           © {new Date().getFullYear()} {p.name}
         </p>
-      </div>
-    </div>
+      </Reveal>
+    </section>
   );
 }

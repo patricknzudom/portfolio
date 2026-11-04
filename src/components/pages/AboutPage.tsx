@@ -2,13 +2,14 @@
 
 import { bio, education, experience, ui } from "@/lib/content";
 import { useLang } from "@/components/LangContext";
+import { Reveal } from "@/components/Reveal";
 
 export function AboutPage() {
   const { lang } = useLang();
 
   return (
-    <div className="min-h-full px-6 py-16 md:px-16 md:py-20">
-      <div className="mx-auto max-w-5xl">
+    <section id="a-propos" className="border-t border-[var(--color-line)] px-6 py-20 md:px-16 md:py-28">
+      <Reveal className="mx-auto max-w-5xl">
         <h2 className="font-mono text-sm text-[var(--color-trace)]">{ui[lang].sectionHeaders.about}</h2>
 
         <div className="mt-6 grid gap-12 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
@@ -48,7 +49,7 @@ export function AboutPage() {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </Reveal>
+    </section>
   );
 }

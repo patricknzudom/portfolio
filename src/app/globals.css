@@ -48,8 +48,14 @@ a {
   text-underline-offset: 3px;
 }
 
-/* Pas de barre de défilement visible dans les pages (la pagination remplace le défilement de
-   page), mais elles restent défilables au clavier/à la molette quand leur contenu dépasse l'écran. */
-.overflow-y-auto {
-  scrollbar-width: thin;
+/* Défilement normal du document (plus de pagination glissante) : les liens d'ancrage défilent en
+   douceur sauf préférence contraire, et chaque section laisse un espace sous la barre fixe. */
+section[id] {
+  scroll-margin-top: 64px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }

@@ -7,8 +7,8 @@ type Node = { x: number; y: number; vx: number; vy: number };
 /**
  * Champ de nœuds et de traces en arrière-plan de l'accueil — pas une démo de particules
  * générique : la distance d'accroche et le surlignage suivent le pointeur comme un oscilloscope
- * suit un signal. Se met en pause hors écran (la page est dans une piste qui glisse) et à l'arrêt
- * complet si le système demande moins de mouvement.
+ * suit un signal. Se met en pause une fois défilé hors écran, et à l'arrêt complet si le système
+ * demande moins de mouvement.
  */
 export function HeroField() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
