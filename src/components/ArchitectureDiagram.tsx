@@ -1,12 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLang } from "@/components/LangContext";
+import { ui, type Lang } from "@/lib/content";
 
-const nodes = [
-  { x: 10, label: "Navigateur", sub: "Next.js (RSC)" },
-  { x: 200, label: "Vercel", sub: "édge + fonctions" },
-  { x: 390, label: "Supabase", sub: "Postgres · RLS" },
-];
+const nodesByLang: Record<Lang, { x: number; label: string; sub: string }[]> = {
+  fr: [
+    { x: 10, label: "Navigateur", sub: "Next.js (RSC)" },
+    { x: 200, label: "Vercel", sub: "édge + fonctions" },
+    { x: 390, label: "Supabase", sub: "Postgres · RLS" },
+  ],
+  en: [
+    { x: 10, label: "Browser", sub: "Next.js (RSC)" },
+    { x: 200, label: "Vercel", sub: "edge + functions" },
+    { x: 390, label: "Supabase", sub: "Postgres · RLS" },
+  ],
+};
 
 const boxW = 118;
 const boxH = 52;
@@ -20,6 +29,8 @@ const y = 20;
  */
 export function ArchitectureDiagram() {
   const [animate, setAnimate] = useState(false);
+  const { lang } = useLang();
+  const nodes = nodesByLang[lang];
 
   useEffect(() => {
     setAnimate(!window.matchMedia("(prefers-reduced-motion: reduce)").matches);
@@ -27,10 +38,8 @@ export function ArchitectureDiagram() {
 
   return (
     <div className="border border-[var(--color-line)] bg-[var(--color-panel)] p-5">
-      <p className="font-mono text-xs text-[var(--color-ink-soft)]">
-        Visibilité appliquée par la base, pas par l&apos;interface
-      </p>
-      <svg viewBox="0 0 518 92" className="mt-4 w-full" role="img" aria-label="Schéma : navigateur, Vercel, puis Supabase avec Postgres et la sécurité au niveau des lignes">
+      <p className="font-mono text-xs text-[var(--color-ink-soft)]">{ui[lang].architectureCaption}</p>
+      <svg viewBox="0 0 518 92" className="mt-4 w-full" role="img" aria-label={ui[lang].architectureCaption}>
         {nodes.slice(0, -1).map((n, i) => {
           const from = n.x + boxW;
           const to = nodes[i + 1].x;

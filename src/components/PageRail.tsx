@@ -1,5 +1,8 @@
 "use client";
 
+import { useLang } from "@/components/LangContext";
+import { ui } from "@/lib/content";
+
 type Page = { id: string; label: string };
 
 export function PageRail({
@@ -11,6 +14,7 @@ export function PageRail({
   index: number;
   onGo: (i: number) => void;
 }) {
+  const { lang } = useLang();
   const atStart = index === 0;
   const atEnd = index === pages.length - 1;
 
@@ -22,13 +26,13 @@ export function PageRail({
       </span>
 
       <div className="flex items-center gap-5">
-        <nav className="flex items-center gap-2.5" aria-label="Sections">
+        <nav className="flex items-center gap-2.5" aria-label={ui[lang].sectionsNav}>
           {pages.map((p, i) => (
             <button
               key={p.id}
               type="button"
               onClick={() => onGo(i)}
-              aria-label={`Aller à ${p.label}`}
+              aria-label={ui[lang].goTo(p.label)}
               aria-current={i === index ? "page" : undefined}
               className="p-1"
             >
@@ -47,7 +51,7 @@ export function PageRail({
             type="button"
             onClick={() => onGo(index - 1)}
             disabled={atStart}
-            aria-label="Page précédente"
+            aria-label={ui[lang].prevPage}
             className="px-2 py-1 text-[var(--color-ink-soft)] hover:text-[var(--color-ink)] disabled:opacity-30"
           >
             ←
@@ -56,7 +60,7 @@ export function PageRail({
             type="button"
             onClick={() => onGo(index + 1)}
             disabled={atEnd}
-            aria-label="Page suivante"
+            aria-label={ui[lang].nextPage}
             className="px-2 py-1 text-[var(--color-ink-soft)] hover:text-[var(--color-ink)] disabled:opacity-30"
           >
             →

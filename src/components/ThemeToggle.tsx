@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLang } from "@/components/LangContext";
+import { ui } from "@/lib/content";
 
 type Theme = "light" | "dark";
 
@@ -10,6 +12,7 @@ function applyTheme(theme: Theme) {
 
 export function ThemeToggle() {
   const [theme, setTheme] = useState<Theme | null>(null);
+  const { lang } = useLang();
 
   useEffect(() => {
     let stored: string | null = null;
@@ -56,7 +59,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      aria-label={theme === "dark" ? "Passer au thème clair" : "Passer au thème sombre"}
+      aria-label={theme === "dark" ? ui[lang].themeLight : ui[lang].themeDark}
       className="flex h-7 w-7 items-center justify-center border border-[var(--color-line)] text-[var(--color-ink-soft)] hover:border-[var(--color-ink)] hover:text-[var(--color-ink)]"
     >
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

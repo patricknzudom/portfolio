@@ -1,4 +1,7 @@
-import { featuredProjects, otherProjects, type Project } from "@/lib/data";
+"use client";
+
+import { featuredProjects, otherProjects, ui, type Project } from "@/lib/content";
+import { useLang } from "@/components/LangContext";
 import { ProfinoDemo } from "@/components/ProfinoDemo";
 import { ArchitectureDiagram } from "@/components/ArchitectureDiagram";
 
@@ -15,7 +18,7 @@ function StackLine({ stack }: { stack: string[] }) {
   );
 }
 
-function ProjectLinks({ project }: { project: Project }) {
+function ProjectLinks({ project, visitLabel, codeLabel }: { project: Project; visitLabel: string; codeLabel: string }) {
   return (
     <div className="mt-5 flex gap-5 font-mono text-xs">
       {project.href && (
@@ -23,7 +26,7 @@ function ProjectLinks({ project }: { project: Project }) {
           href={project.href}
           className="border-b border-[var(--color-copper)] text-[var(--color-copper-strong)] hover:border-[var(--color-ink)] hover:text-[var(--color-ink)]"
         >
-          Visiter le site
+          {visitLabel}
         </a>
       )}
       {project.repo && (
@@ -31,7 +34,7 @@ function ProjectLinks({ project }: { project: Project }) {
           href={project.repo}
           className="border-b border-[var(--color-line)] text-[var(--color-ink-soft)] hover:border-[var(--color-ink)] hover:text-[var(--color-ink)]"
         >
-          Code source
+          {codeLabel}
         </a>
       )}
     </div>
@@ -54,7 +57,7 @@ function CompactRow({ project }: { project: Project }) {
               href={project.href}
               className="font-mono text-xs text-[var(--color-ink-soft)] underline decoration-[var(--color-line)] underline-offset-2 hover:text-[var(--color-ink)]"
             >
-              Lien
+              {project.href.replace(/^https?:\/\//, "")}
             </a>
           )}
         </div>
@@ -64,12 +67,14 @@ function CompactRow({ project }: { project: Project }) {
 }
 
 export function ProjectsPage() {
-  const [babillard, profino] = featuredProjects;
+  const { lang } = useLang();
+  const [babillard, profino] = featuredProjects[lang];
+  const t = ui[lang];
 
   return (
     <div className="min-h-full px-6 py-16 md:px-16 md:py-20">
       <div className="mx-auto max-w-5xl">
-        <h2 className="font-mono text-sm text-[var(--color-trace)]">03 — Projets</h2>
+        <h2 className="font-mono text-sm text-[var(--color-trace)]">{t.sectionHeaders.projects}</h2>
 
         <div className="mt-6 grid gap-5 md:grid-cols-2">
           <div className="flex flex-col border border-[var(--color-line)] bg-[var(--color-panel)] p-6">
@@ -79,7 +84,7 @@ export function ProjectsPage() {
             </div>
             <p className="mt-3 text-sm leading-relaxed text-[var(--color-ink-soft)]">{babillard.description}</p>
             <StackLine stack={babillard.stack} />
-            <ProjectLinks project={babillard} />
+            <ProjectLinks project={babillard} visitLabel={t.visitSite} codeLabel={t.sourceCode} />
           </div>
 
           <div className="flex flex-col border border-[var(--color-line)] bg-[var(--color-panel)] p-6">
@@ -89,7 +94,7 @@ export function ProjectsPage() {
             </div>
             <p className="mt-3 text-sm leading-relaxed text-[var(--color-ink-soft)]">{profino.description}</p>
             <StackLine stack={profino.stack} />
-            <ProjectLinks project={profino} />
+            <ProjectLinks project={profino} visitLabel={t.visitSite} codeLabel={t.sourceCode} />
           </div>
         </div>
 
@@ -99,7 +104,7 @@ export function ProjectsPage() {
         </div>
 
         <div className="mt-10">
-          {otherProjects.map((p) => (
+          {otherProjects[lang].map((p) => (
             <CompactRow key={p.name} project={p} />
           ))}
         </div>

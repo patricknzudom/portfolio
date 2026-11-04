@@ -2,18 +2,22 @@
 
 import { useState, type FormEvent } from "react";
 import { matchFaculty, type FacultyProfile } from "@/lib/profinoDemoData";
+import { useLang } from "@/components/LangContext";
+import { ui } from "@/lib/content";
 
 /**
  * Pas une capture d'écran : un vrai petit classeur par mots-clés, pour montrer le principe que
  * Profino applique (profil → corps professoral pertinent) plutôt que de se contenter de le décrire.
  */
 export function ProfinoDemo() {
+  const { lang } = useLang();
+  const t = ui[lang];
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<{ person: FacultyProfile; score: number }[] | null>(null);
   const [searched, setSearched] = useState(false);
 
   function run(q: string) {
-    setResults(matchFaculty(q));
+    setResults(matchFaculty(lang, q));
     setSearched(true);
   }
 
@@ -26,28 +30,26 @@ export function ProfinoDemo() {
 
   return (
     <div className="border border-[var(--color-line)] bg-[var(--color-panel)] p-5">
-      <p className="font-mono text-xs text-[var(--color-ink-soft)]">
-        Essaie le principe — tape des mots-clés de recherche
-      </p>
+      <p className="font-mono text-xs text-[var(--color-ink-soft)]">{t.demoTitle}</p>
       <form onSubmit={onSubmit} className="mt-3 flex gap-2">
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="ex. robotique, bases de données, sécurité"
+          placeholder={t.demoPlaceholder}
           className="min-w-0 flex-1 border border-[var(--color-line)] bg-transparent px-3 py-2 text-sm outline-none placeholder:text-[var(--color-ink-soft)] focus:border-[var(--color-copper)]"
         />
         <button
           type="submit"
           className="shrink-0 border border-[var(--color-copper)] px-3 py-2 font-mono text-xs text-[var(--color-copper-strong)] hover:bg-[var(--color-copper)] hover:text-[var(--color-panel)]"
         >
-          Chercher
+          {t.demoButton}
         </button>
       </form>
 
       <div className="mt-4 min-h-24">
         {!searched && (
           <div className="flex flex-wrap gap-2">
-            {["robotique", "bases de données", "sécurité", "apprentissage automatique"].map((ex) => (
+            {t.demoChips.map((ex) => (
               <button
                 key={ex}
                 type="button"
@@ -64,9 +66,7 @@ export function ProfinoDemo() {
         )}
 
         {searched && results && results.length === 0 && (
-          <p className="text-sm text-[var(--color-ink-soft)]">
-            Aucune correspondance dans ce petit échantillon de démo — essaie « robotique » ou « sécurité ».
-          </p>
+          <p className="text-sm text-[var(--color-ink-soft)]">{t.demoEmpty}</p>
         )}
 
         {searched && results && results.length > 0 && (
@@ -91,10 +91,7 @@ export function ProfinoDemo() {
         )}
       </div>
 
-      <p className="mt-4 text-xs text-[var(--color-ink-soft)]">
-        Démo : recoupement de mots-clés sur 8 profils fictifs, calculé dans le navigateur. La vraie
-        Profino classe par similarité d&apos;embeddings sur de vraies publications récentes.
-      </p>
+      <p className="mt-4 text-xs text-[var(--color-ink-soft)]">{t.demoFooter}</p>
     </div>
   );
 }

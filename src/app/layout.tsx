@@ -8,9 +8,9 @@ import "@fontsource/ibm-plex-mono/500.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Patrick Nzudom — Génie informatique",
+  title: "Patrick Nzudom — Génie informatique / Computer Engineering",
   description:
-    "Étudiant en génie informatique à Polytechnique Montréal. Projets : Babillard, Profino, et systèmes embarqués.",
+    "Étudiant en génie informatique à Polytechnique Montréal. Projets : Babillard, Profino, et systèmes embarqués. / Computer engineering student at Polytechnique Montréal.",
 };
 
 // Posée avant l'hydratation pour éviter un flash de thème clair chez une personne qui a choisi
