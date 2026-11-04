@@ -1,9 +1,11 @@
 import { profile } from "@/lib/data";
+import { HeroField } from "@/components/HeroField";
 
 export function IntroPage() {
   return (
-    <div className="flex min-h-full flex-col justify-center px-6 py-16 md:px-16">
-      <div className="mx-auto w-full max-w-3xl">
+    <div className="relative flex min-h-full flex-col justify-center overflow-hidden px-6 py-16 md:px-16">
+      <HeroField />
+      <div className="relative z-[1] mx-auto w-full max-w-3xl">
         <p className="font-mono text-sm text-[var(--color-trace)]">{profile.role}</p>
         <h1 className="mt-4 text-4xl font-semibold tracking-tight md:text-6xl">{profile.name}</h1>
         <p className="mt-6 max-w-xl text-lg leading-relaxed text-[var(--color-ink-soft)]">{profile.pitch}</p>

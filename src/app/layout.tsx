@@ -13,9 +13,22 @@ export const metadata: Metadata = {
     "Étudiant en génie informatique à Polytechnique Montréal. Projets : Babillard, Profino, et systèmes embarqués.",
 };
 
+// Posée avant l'hydratation pour éviter un flash de thème clair chez une personne qui a choisi
+// (ou dont le système préfère) le sombre — ThemeToggle prend ensuite le relais pour les bascules.
+const themeInitScript = `
+  try {
+    var t = localStorage.getItem("theme");
+    var d = t ? t === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (d) document.documentElement.classList.add("dark");
+  } catch (e) {}
+`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr">
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="font-sans antialiased">{children}</body>
     </html>
   );

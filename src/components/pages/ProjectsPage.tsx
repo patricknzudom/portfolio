@@ -1,5 +1,6 @@
 import { featuredProjects, otherProjects, type Project } from "@/lib/data";
 import { ProfinoDemo } from "@/components/ProfinoDemo";
+import { ArchitectureDiagram } from "@/components/ArchitectureDiagram";
 
 function StackLine({ stack }: { stack: string[] }) {
   return (
@@ -92,7 +93,8 @@ export function ProjectsPage() {
           </div>
         </div>
 
-        <div className="mt-5">
+        <div className="mt-5 grid gap-5 md:grid-cols-2">
+          <ArchitectureDiagram />
           <ProfinoDemo />
         </div>
 
