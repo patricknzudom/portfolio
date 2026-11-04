@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+}
+
+/* Palette "fiche technique" : fond papier froid, encre pour le texte, cuivre pour l'accent
+   principal (liens, CTA), sarcelle pour les repères techniques (puces de section, tags). */
+@theme {
+  --color-paper: #eef1f3;
+  --color-ink: #151b23;
+  --color-ink-soft: #4a5560;
+  --color-copper: #ad6a30;
+  --color-copper-strong: #8f5726;
+  --color-trace: #2d7a86;
+  --color-line: #c9ced3;
+  --color-panel: #ffffff;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+html.dark body {
+  --color-paper: #11151a;
+  --color-ink: #e7eaed;
+  --color-ink-soft: #9aa5b0;
+  --color-copper: #d08a4e;
+  --color-copper-strong: #e5a469;
+  --color-trace: #5fb3bf;
+  --color-line: #2a323b;
+  --color-panel: #171c22;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--color-copper) 35%, transparent);
+}
+
+a {
+  text-underline-offset: 3px;
+}
+
+/* Respecte les préférences de mouvement réduit : la seule animation du site (le trait qui se
+   dessine dans la marge) est coupée net plutôt que simplement ralentie. */
+@media (prefers-reduced-motion: reduce) {
+  .rail-trace {
+    animation: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+}
