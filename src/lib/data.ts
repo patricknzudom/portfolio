@@ -17,7 +17,7 @@ export const education = [
     school: "Polytechnique Montréal",
     program: "Baccalauréat en génie informatique, formation d'ingénieur",
     place: "Montréal, QC",
-    period: "Jan. 2023 – Déc. 2026",
+    period: "Jan. 2023 – Mai 2027",
   },
   {
     school: "Universidad de Sevilla",
@@ -49,13 +49,6 @@ export const experience = [
     period: "Mai – Août 2025",
     detail:
       "Conception et développement de logiciels d'ingénierie, refactorisation de systèmes actifs, tests de régression sur matériel.",
-  },
-  {
-    role: "Développeur web",
-    org: "Université de la Colombie-Britannique",
-    place: "Vancouver, C.-B.",
-    period: "Mai – Août 2023",
-    detail: "Application web full-stack (JavaScript, Node.js) et encadrement d'étudiants sur le front-end.",
   },
 ];
 
